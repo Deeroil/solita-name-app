@@ -69,7 +69,9 @@ const App = () => {
 
   const filterList = (list) => {
     //haluunks tarkistaa täällä jo newFilterin pituuden :--D vois vaa.. kadota.. emt
+
     if (newFilter.length == 0) {
+      setShow(names)
       return
     }
 
@@ -85,9 +87,10 @@ const App = () => {
           )
       )
 
-    console.log('filterList, filtered: ', filtered)
+    console.log('filterList, filtered: ', filtered, typeof filtered)
 
-    if (filtered.length === 0 || filtered == null) {
+    //tein tänne filtered.size enkä filtered.len hm
+    if (filtered.size === 0 || filtered == null) {
       setShow(formNameList(names))
       return
     }
@@ -129,8 +132,10 @@ const App = () => {
       <Filter setNewFilter={setNewFilter} />
       <div>
         <b>Names:</b>
-        {/* joojoo mä teen tälle vielä jotain */}
-        {(show.length > 1) ? formNameList(show) : <div> emt </div> }
+        {/* Lol mä rikoin tän */}
+        {(show.length > 1) ? formNameList(show)
+          ? (show.length === 1) : <div> Amount of {show.name}s is {show.amount}</div>
+          : <div>show.length is {show.length}</div>}
       </div>
       {/* ok nää on jotenkin hassusti :DD tietty. Kun tota toista päivitetään jäljessä */}
     </div>
