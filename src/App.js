@@ -5,17 +5,13 @@ import nameService from './services/names'
 
 const App = () => {
   const [names, setNames] = useState([])
-  //sinänsä tätä ei muokata e__e joten se vois olla vaan lista.
-  //mut entä sit ööhm hmm nii ne rajatut joo
   const [newFilter, setNewFilter] = useState('')
-  //const [filtered, setFiltered] = useState([])
   const [show, setShow] = useState([])
-  
+  // hmmm miten saisin sen Total tohon Names-listailun tilalle sit halutessani??
 
   useEffect(() => {
     const getNames = async () => {
       const namesJSON = await nameService.getAll()
-      // console.log('namesJSON', namesJSON, 'namesJSON:', typeof namesJSON)
       setNames(namesJSON)
     }
     getNames()
@@ -23,26 +19,17 @@ const App = () => {
 
   useEffect(() => {
     filterList(names)
-  }, [newFilter])
-
-  //vai myös dependencyks tälle setNewFilter..???
-  // useEffect(() => {
-  //   console.log('filter useEffect löggöys')
-  //   //emt haluunks... jotain... hmm.
-  // }, [newFilter])
+  }, [newFilter, names])
 
   //vai haluunko että tää vaan suoraa sorttaa _kaikki_, eikä annettua listaa
+  //haluunko että nää return sorted vai suoraan asettaa? Haluunko nimetä uusiksi?
   const sortByPopularity = (list) => {
     //slice to make a new array / deep copy
-    // const sorted = names.slice().sort((a, b) => b.amount - a.amount)
-    //setNames(sorted) //hmm tää on ehkä turhaa. joo. hmm.
     const sorted = list.slice().sort((a, b) => b.amount - a.amount)
     setShow(sorted)
   }
 
   const sortAlphabet = (list) => {
-    //const sorted = names.slice().sort((a, b) => (a.name > b.name) ? 1 : -1)
-    //setNames(sorted) //hmm tää on ehkä turhaa. joo. hmm.
     const sorted = list.slice().sort((a, b) => (a.name > b.name) ? 1 : -1)
     setShow(sorted)
   }
@@ -68,34 +55,31 @@ const App = () => {
   // }
 
   const filterList = (list) => {
-    //haluunks tarkistaa täällä jo newFilterin pituuden :--D vois vaa.. kadota.. emt
-
-    if (newFilter.length == 0) {
-      setShow(names)
-      return
-    }
+    //haluunks tarkistaa täällä jo newFilterin pituuden :--D vois vaa.. kadota.. em
 
     //ÄÄÄÄÄÄ miten asioita saa luettavaksi oh god
     const filtered = list
       .filter(o => o.name
           .trim()
           .toUpperCase()
-          .startsWith(
-            newFilter
-              .trim()
-              .toUpperCase()
-          )
+          .startsWith(newFilter)
       )
-
     console.log('filterList, filtered: ', filtered, typeof filtered)
 
-    //tein tänne filtered.size enkä filtered.len hm
-    if (filtered.size === 0 || filtered == null) {
-      setShow(formNameList(names))
+    // console.log('entering filterList... show is..', show)
+    if (newFilter.length === 0 || filtered.size === 0) {
+      setShow('')
+      console.log('newFilter.len == 0')
       return
     }
 
     setShow(filtered)
+    
+    //tein tänne filtered.size enkä filtered.len hm
+    // if (filtered.size === 0 || filtered == null) {
+    //   setShow(formNameList(names))
+    //   return
+    // }
     
     //lol ei sillä oo väliä jos vaan tarkistan lopuksi vaikka että onks se yksi vai enemmän.
     // if (filtered.length === 1) {
@@ -132,9 +116,8 @@ const App = () => {
       <Filter setNewFilter={setNewFilter} />
       <div>
         <b>Names:</b>
-        {/* Lol mä rikoin tän */}
         {(show.length > 1) ? formNameList(show)
-          ? (show.length === 1) : <div> Amount of {show.name}s is {show.amount}</div>
+          : (show.length === 1) ? <div> Amount of {show[0].name}s is {show[0].amount}</div>
           : <div>show.length is {show.length}</div>}
       </div>
       {/* ok nää on jotenkin hassusti :DD tietty. Kun tota toista päivitetään jäljessä */}

@@ -1,25 +1,26 @@
 import React from 'react'
 
-const Filter = ({ setShowAll, setNewFilter }) => {
-    //uuuhhh poistin sen show/showAll staten :DDD :DDD nooh
-    const handleFilterChange = (event) => {
-      if (event.target.value === null) {
-        //setShowAll(true)
-        //lol onks tyhjä string epänull :DDDD
-        console.log('filter value no-no')
-      } else {
-        setNewFilter(event.target.value)
-        //setShowAll(false)
-        console.log('filter:', event.target.value)
-      }
+const Filter = ({ setNewFilter }) => {
+
+  //filter is trimmed and uppercase
+  const handleFilterChange = (event) => {
+    const filter = event.target.value.trim().toUpperCase()
+    console.log('Filter in Filter:', filter)
+    if (!filter) {
+      setNewFilter('')
+      console.log('newFilter set to none')
+    } else {
+      setNewFilter(filter)
+      console.log('newFilter has value')
     }
-  
-    return (
-      <div>
-        filter names: {/** hmm eiku nyt tää on tosi spesifi. otetaans toi tosta ulos :D */}
-        <input onChange={handleFilterChange} />
-      </div>
-    )
   }
 
-  export default Filter
+  return (
+    <div>
+      filter names: {/** hmm eiku nyt tää on tosi spesifi. otetaanks toi tosta ulos :D */}
+      <input onChange={handleFilterChange} />
+    </div>
+  )
+}
+
+export default Filter
