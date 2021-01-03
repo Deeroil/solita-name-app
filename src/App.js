@@ -8,6 +8,7 @@ import nameService from './services/names'
  *    Filtered names aren't shown unless you first press a sort button
  *    getAmount doesn't work
  *    ---> everyone-button renders total amount only if first sorted
+ *    ok apua: jos esim filtterinä on vaan V, niin tulos on suoraan amount XDD ei tää oo hyvä...
  */
 
 const App = () => {
@@ -62,7 +63,7 @@ const App = () => {
   //myös muista napeista .__.
   // => Dento selitti: se kutsuttiin joka renderöinnillä kai?
   const totalAmount = (list) => {
-    console.log('total amount', list.reduce((sum, a) => sum + a.amount, 0))
+    return list.reduce((sum, a) => sum + a.amount, 0)
   }
 
   //pff onks ihan hölmöä jos nää on vaan yksi funktio e____e ööhm..
@@ -116,6 +117,7 @@ const App = () => {
  
   const filterList = (list) => {
     //haluunks tarkistaa täällä jo newFilterin pituuden..??
+    setShowAmount(false)
     const filtered = list
       .filter(o => o.name
         .trim()
@@ -204,7 +206,7 @@ const App = () => {
       <div>
         {(show.length > 1) ? formNameList(show)
           : (show.length === 1) ? <div> {getAmount(show)} </div> /*<div> Amount of {show[0].name}s is {show[0].amount}</div>**/
-            : (showAmount) ? <div> total amount is blabla </div> 
+            : (showAmount) ? <div> total amount is {totalAmount(names)} </div> 
               : <div>Interact to show data :) show.length is {show.length}</div>}
       </div>
     )
