@@ -148,16 +148,6 @@ const App = () => {
     )
   }
 
-  const showStuff = () => {
-    return (
-      <div>
-        {(show.length > 1) ? formNameList(show)
-          : (show.length === 1) ? <div> {getAmount(show)} </div> /*<div> Amount of {show[0].name}s is {show[0].amount}</div>**/
-            : <div>show.length is {show.length}</div>}
-      </div>
-    )
-  }
-
   const showConditionally = () => {
     if ((!showNames && !showAmount) || !show) {
       return null
@@ -209,12 +199,29 @@ const App = () => {
     setShowAmount(true)
   }
 
+  const showStuff = () => {
+    return (
+      <div>
+        {(show.length > 1) ? formNameList(show)
+          : (show.length === 1) ? <div> {getAmount(show)} </div> /*<div> Amount of {show[0].name}s is {show[0].amount}</div>**/
+            : (showAmount) ? <div> total amount is blabla </div> 
+              : <div>Interact to show data :) show.length is {show.length}</div>}
+      </div>
+    )
+  }
+
+  const handleTotalAmount = () => {
+    setShow([])
+    setShowAmount(true)
+  }
+
   return (
     <div>
       <h3>Solita Name App</h3>
       <div>
         show amount of..
-        <button onClick={() => showTotalAmount()}>everyone</button>
+        <button onClick={() => handleTotalAmount()}>everyone</button>
+        {/* <button onClick={() => showTotalAmount()}>everyone</button> */}
         {/* --> setShowAmount(true), setShowNames(false),  */}
         {/* <button onClick={() => totalAmount(names)}>everyone</button> */}
       </div>
@@ -225,7 +232,8 @@ const App = () => {
         <button onClick={() => sortAlphabet(names)}>Alphabet</button>
       </div>
       <Filter setNewFilter={setNewFilter} />
-      <div>{showConditionally()}</div>
+      {/* <div>{showConditionally()}</div> */}
+      {showStuff()}
       {/* ok nää on jotenkin hassusti :DD tietty. Kun tota toista päivitetään jäljessä */}
     </div>
   )
