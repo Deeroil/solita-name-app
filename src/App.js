@@ -18,7 +18,7 @@ const App = () => {
   //uh oisko joku muu nimi ööhm. nää on filtered or sorted .--.
   //namesList? ööhhmm
   const [shownNames, setShownNames] = useState([])
-  
+
   //haluunko tän kuitenkin vaa laskea aina getAmountilla tjsp :--D
   //totalVisible vai showTotal vaaai
   //tää on nyt kovin pitkä
@@ -36,7 +36,7 @@ const App = () => {
     filterList(allNames)
   }, [newFilter, allNames])
 
- 
+
   //kinda duplicatey, but makes the code more readable
   const sortByPopularity = () => {
     setTotalAmountVisible(false)
@@ -76,9 +76,9 @@ const App = () => {
       console.log('total', total)
       return total
     }
-    console.log('RIP getAmount... obj:', obj )
+    console.log('RIP getAmount... obj:', obj)
   }
- 
+
   const filterList = (list) => {
     //haluunks tarkistaa täällä jo newFilterin pituuden..??
     setTotalAmountVisible(false)
@@ -115,12 +115,34 @@ const App = () => {
   const showResults = () => {
     return (
       <div>
-        <br/>
+        <br />
         {(shownNames.length > 1) ? formNameList(shownNames)
           : (shownNames.length === 1) ? <div> There are {getAmount(shownNames)} {shownNames[0].name}s in Solita </div> /*<div> Amount of {show[0].name}s is {show[0].amount}</div>**/
-            : (totalAmountVisible) ? <div> total amount: {totalAmount(allNames)} </div> 
+            : (totalAmountVisible) ? <div> total amount: {totalAmount(allNames)} </div>
               : <div> nothing here :) interact to see data  </div>}
       </div>
+    )
+  }
+
+  const sshowResults = () => {
+    if (shownNames.length > 1) {
+      return formNameList(shownNames)
+    }
+
+    if (shownNames.length === 1) {
+      return (
+        <div> There are {getAmount(shownNames)} {shownNames[0].name}s in Solita </div>
+      )
+    }
+
+    if (totalAmountVisible) {
+      return (
+        <div> total amount: {totalAmount(allNames)} </div>
+      )
+    }
+
+    return (
+      <div> nothing here :) interact to see data  </div>
     )
   }
 
@@ -142,6 +164,7 @@ const App = () => {
       </div>
       <Filter setNewFilter={setNewFilter} />
       {showResults()}
+      {sshowResults()}
     </div>
   )
 }
