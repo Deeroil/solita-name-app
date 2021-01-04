@@ -1,70 +1,32 @@
-# Getting Started with Create React App
+## Solita Dev-Academy Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Simple Web App for Solita's most popular first names for men and women.
+There's three buttons to sort the names (popularity or alphabetical) or get total amount of them. You can also filter the names using an input field.
 
-## Available Scripts
+The frontend was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-In the project directory, you can run:
+The backend is an REST API written in Express with Node.js. Only HTTP GET-requests are allowed. Name data is read from a JSON file.
 
-### `npm start`
+<b><sub> Work in progress!
+This readme is still in progress, and the code is full of stuff I still need to improve and make cleaner.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## To do:
+* Pick which showResults func to use (ternary vs. ifs)
+* Remove outdated comments, unused components and some other stuff
+* Fix alphabetic sort, it shouldn't return amounts
+* Maybe only return total amount and single name's amount? Without other text?
+	* Return single amount only after typing the whole name? Hm.
+* Add Namelist component if it feels right
+* Add CSS 
+* Add script for installing both folders at the same time
+	* same for running them / npm start  
+ * Rename blablajne.js or remove it
+ * Consider adding sort etc to the API
+ * Consider deploying to heroku
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installing and scripts
+The frontend and backend are still separate and don't have 
+I suppose you can use `npm install` for each in their directories. I'll try to make a script for this so it's simpler, or fix it some other way.
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Both frontend and backend run in development mode by running `npm start` in their respective directories.
+Open [http://localhost:3000](http://localhost:3000) to view front in the browser, backend opens in [http://localhost:3003](http://localhost:300)
