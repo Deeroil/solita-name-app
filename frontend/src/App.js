@@ -54,11 +54,9 @@ const App = () => {
         .toUpperCase()
         .startsWith(newFilter)
       )
-    console.log('filterList, filtered: ', filtered, typeof filtered)
 
     if (newFilter.length === 0 || filtered.size === 0) {
       setShownNames('')
-      console.log('filter and show are empty')
       return
     }
 
