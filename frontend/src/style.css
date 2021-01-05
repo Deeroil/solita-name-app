@@ -1,0 +1,18 @@
+* {
+  font-family: monospace;
+}
+
+button {
+  cursor: pointer;
+  background-color: lightcyan;
+  border-radius: 6px;
+  margin: 5px;
+}
+
+button:hover {
+  background-color: rgb(108, 204, 204);
+}
+
+button:active {
+  background-color: lightseagreen;
+}
