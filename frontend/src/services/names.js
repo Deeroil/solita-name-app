@@ -2,7 +2,7 @@ import axios from 'axios'
 const baseUrl = '/api/names'
 
 const getAll = async () => {
-  const response = await axios.get('http://localhost:3003/api/names')
+  const response = await axios.get(baseUrl)
   return response.data
 }
 
