@@ -16,11 +16,11 @@ import nameService from './services/names'
 const App = () => {
   const [allNames, setAllNames] = useState([])
   const [newFilter, setNewFilter] = useState('')
-  //uh oisko joku muu nimi ööhm. nää on filtered or sorted .--.
+  //oisko joku muu nimi? nää on filtered or sorted
   //namesList? ööhhmm
   const [shownNames, setShownNames] = useState([])
 
-  //haluunko tän kuitenkin vaa laskea aina getAmountilla tjsp :--D
+  //haluunko tän kuitenkin vaa laskea aina getAmountilla?
   //totalVisible vai showTotal vaaai
   //tää on nyt kovin pitkä
   const [totalAmountVisible, setTotalAmountVisible] = useState(false)
@@ -51,33 +51,7 @@ const App = () => {
     setShownNames(sorted)
   }
 
-  //jostain syystä kun laitoin totalAmount(list) niin se clogas tän
-  //myös muista napeista .__.
-  // => Dento selitti: se kutsuttiin joka renderöinnillä kai?
-  const totalAmount = (list) => {
-    return list.reduce((sum, a) => sum + a.amount, 0)
-  }
-
-  //pff onks ihan hölmöä jos nää on vaan yksi funktio e____e ööhm..
-  //no sen voi pilkkoo sit
-  //tätä pitää kyl kans hioo, ainakin ton booleanhässäkän kaa.
-  const getAmount = (obj) => {
-    console.log('getAmount obj:', obj)
-    console.log('getAmount obj.len:', obj.length)
-
-    //if obj has amount field, it's probably just one obj
-    if (obj.amount) {
-      return obj.amount
-    }
-    //otherwise it should be a list of names, return total amount
-    if (obj.length > 0) {
-      //return obj.reduce((sum, a) => sum + a.amount, 0)
-      const total = obj.reduce((sum, a) => sum + a.amount, 0)
-      console.log('total', total)
-      return total
-    }
-    console.log('RIP getAmount... obj:', obj)
-  }
+  const totalAmount = () => allNames.reduce((sum, a) => sum + a.amount, 0)
 
   const filterList = (list) => {
     //haluunks tarkistaa täällä jo newFilterin pituuden..??
@@ -108,8 +82,8 @@ const App = () => {
       <div>
         <br />
         {(shownNames.length > 1) ? <Namelist list={shownNames} />
-          : (shownNames.length === 1) ? <div> There are {getAmount(shownNames)} {shownNames[0].name}s in Solita </div> /*<div> Amount of {show[0].name}s is {show[0].amount}</div>**/
-            : (totalAmountVisible) ? <div> total amount: {totalAmount(allNames)} </div>
+          : (shownNames.length === 1) ? <div> There are {shownNames[0].amount} {shownNames[0].name}s in Solita </div> /*<div> Amount of {show[0].name}s is {show[0].amount}</div>**/
+            : (totalAmountVisible) ? <div> total amount: {totalAmount()} </div>
               : <div> nothing here :) interact to see data  </div>}
       </div>
     )
@@ -122,13 +96,13 @@ const App = () => {
 
     if (shownNames.length === 1) {
       return (
-        <div> There are {getAmount(shownNames)} {shownNames[0].name}s in Solita </div>
+        <div> There are {shownNames[0].amount} {shownNames[0].name}s in Solita </div>
       )
     }
 
     if (totalAmountVisible) {
       return (
-        <div> total amount: {totalAmount(allNames)} </div>
+        <div> total amount: {totalAmount()} </div>
       )
     }
 
