@@ -71,10 +71,6 @@ const App = () => {
     }
 
     setShownNames(filtered)
-
-    if (filtered.length === 1) {
-      setTotalAmountVisible(true)
-    }
   }
 
   const showResults = () => {
