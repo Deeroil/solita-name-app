@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Name from './components/Name'
+import Namelist from './components/Namelist'
 import Filter from './components/Filter'
 import Button from './components/Button'
 import nameService from './services/names'
@@ -35,7 +36,6 @@ const App = () => {
   useEffect(() => {
     filterList(allNames)
   }, [newFilter, allNames])
-
 
   //kinda duplicatey, but makes the code more readable
   const sortByPopularity = () => {
@@ -103,20 +103,11 @@ const App = () => {
     }
   }
 
-  const formNameList = (list) => {
-    return (
-      <div>
-        <b>Names:</b>
-        {list.map(n => <div key={n.name}> <Name obj={n} /> </div>)}
-      </div>
-    )
-  }
-
   const showResults = () => {
     return (
       <div>
         <br />
-        {(shownNames.length > 1) ? formNameList(shownNames)
+        {(shownNames.length > 1) ? <Namelist list={shownNames} />
           : (shownNames.length === 1) ? <div> There are {getAmount(shownNames)} {shownNames[0].name}s in Solita </div> /*<div> Amount of {show[0].name}s is {show[0].amount}</div>**/
             : (totalAmountVisible) ? <div> total amount: {totalAmount(allNames)} </div>
               : <div> nothing here :) interact to see data  </div>}
@@ -126,7 +117,7 @@ const App = () => {
 
   const sshowResults = () => {
     if (shownNames.length > 1) {
-      return formNameList(shownNames)
+      return <Namelist list={shownNames} />
     }
 
     if (shownNames.length === 1) {
@@ -155,13 +146,12 @@ const App = () => {
     <div>
       <h3>Solita Name App</h3>
       <div>
-        <button onClick={handleTotalVisibility}>Total amount</button>
-      </div>
-      <div>
         Sort by...
-        <button onClick={sortByPopularity}>Popularity</button>
-        <button onClick={sortAlphabet}>Alphabet</button>
+        <Button onClick={sortByPopularity} label={'Popular'} />
+        <Button onClick={sortAlphabet} label={'Alphabet'} />
       </div>
+      Show...
+      <Button onClick={handleTotalVisibility} label={'Total amount'} />
       <Filter setNewFilter={setNewFilter} />
       {showResults()}
       {sshowResults()}
