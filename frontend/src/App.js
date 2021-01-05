@@ -64,18 +64,6 @@ const App = () => {
   }
 
   const showResults = () => {
-    return (
-      <div>
-        <br />
-        {(shownNames.length > 1) ? <Namelist list={shownNames} />
-          : (shownNames.length === 1) ? <div> There are {shownNames[0].amount} {shownNames[0].name}s in Solita </div> /*<div> Amount of {show[0].name}s is {show[0].amount}</div>**/
-            : (totalVisible) ? <div> total amount: {totalAmount()} </div>
-              : <div> nothing here :) interact to see data  </div>}
-      </div>
-    )
-  }
-
-  const sshowResults = () => {
     if (shownNames.length > 1) return <Namelist list={shownNames} />
 
     else if (shownNames.length === 1) return <div> There are {shownNames[0].amount} {shownNames[0].name}s in Solita </div>
@@ -102,7 +90,6 @@ const App = () => {
       <Button onClick={handleTotalVisibility} label={'Total amount'} />
       <Filter setNewFilter={setNewFilter} />
       {showResults()}
-      {sshowResults()}
     </div>
   )
 }
