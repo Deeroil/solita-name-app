@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import Name from './components/Name'
 import Namelist from './components/Namelist'
 import Filter from './components/Filter'
 import Button from './components/Button'
 import nameService from './services/names'
 
 /** Problems:
- *    Filtered names aren't shown unless you first press a sort button
- *    getAmount doesn't work
- *    ---> everyone-button renders total amount only if first sorted
- *    todo: jos esim filtterinä on vaan V, niin tulos on suoraan amount XDD ei hyvä...
- *    todo: kun nappia painetaan, tyhjennetään input sisältö? 
+ *    * jos esim filtterinä on vaan V, niin tulos on suoraan amount
+ *    * todo: kun nappia painetaan, tyhjennetään input sisältö? 
  */
 
 const App = () => {
@@ -19,11 +15,7 @@ const App = () => {
   //oisko joku muu nimi? nää on filtered or sorted
   //namesList? ööhhmm
   const [shownNames, setShownNames] = useState([])
-
-  //haluunko tän kuitenkin vaa laskea aina getAmountilla?
-  //totalVisible vai showTotal vaaai
-  //tää on nyt kovin pitkä
-  const [totalAmountVisible, setTotalAmountVisible] = useState(false)
+  const [totalVisible, setTotalVisible] = useState(false)
 
   useEffect(() => {
     const getNames = async () => {
@@ -39,14 +31,14 @@ const App = () => {
 
   //kinda duplicatey, but makes the code more readable
   const sortByPopularity = () => {
-    setTotalAmountVisible(false)
+    setTotalVisible(false)
     //slice to make a new array / deep copy
     const sorted = allNames.slice().sort((a, b) => b.amount - a.amount)
     setShownNames(sorted)
   }
 
   const sortAlphabet = () => {
-    setTotalAmountVisible(false)
+    setTotalVisible(false)
     const sorted = allNames.slice().sort((a, b) => (a.name > b.name) ? 1 : -1)
     setShownNames(sorted)
   }
@@ -54,8 +46,8 @@ const App = () => {
   const totalAmount = () => allNames.reduce((sum, a) => sum + a.amount, 0)
 
   const filterList = (list) => {
-    //haluunks tarkistaa täällä jo newFilterin pituuden..??
-    setTotalAmountVisible(false)
+    setTotalVisible(false)
+
     const filtered = list
       .filter(o => o.name
         .trim()
@@ -79,37 +71,25 @@ const App = () => {
         <br />
         {(shownNames.length > 1) ? <Namelist list={shownNames} />
           : (shownNames.length === 1) ? <div> There are {shownNames[0].amount} {shownNames[0].name}s in Solita </div> /*<div> Amount of {show[0].name}s is {show[0].amount}</div>**/
-            : (totalAmountVisible) ? <div> total amount: {totalAmount()} </div>
+            : (totalVisible) ? <div> total amount: {totalAmount()} </div>
               : <div> nothing here :) interact to see data  </div>}
       </div>
     )
   }
 
   const sshowResults = () => {
-    if (shownNames.length > 1) {
-      return <Namelist list={shownNames} />
-    }
+    if (shownNames.length > 1) return <Namelist list={shownNames} />
 
-    if (shownNames.length === 1) {
-      return (
-        <div> There are {shownNames[0].amount} {shownNames[0].name}s in Solita </div>
-      )
-    }
+    else if (shownNames.length === 1) return <div> There are {shownNames[0].amount} {shownNames[0].name}s in Solita </div>
 
-    if (totalAmountVisible) {
-      return (
-        <div> total amount: {totalAmount()} </div>
-      )
-    }
+    else if (totalVisible) return <div> total amount: {totalAmount()} </div>
 
-    return (
-      <div> nothing here :) interact to see data  </div>
-    )
+    else return <div> nothing here, interact to see data </div>
   }
 
   const handleTotalVisibility = () => {
     setShownNames([])
-    setTotalAmountVisible(true)
+    setTotalVisible(true)
   }
 
   return (
