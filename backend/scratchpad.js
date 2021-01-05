@@ -22,7 +22,7 @@ console.log('sort pairs desc amount:', objPairs.sort((a, b) => b.amount - a.amou
 console.log('sort pairs alph:', objPairs.sort((a, b) => a.name > b.name ? 1 : -1))
 
 //oho ainiin ne halusi pelkät nimet
-console.log('sorted names:',objPairs.map(n => n.name).sort((a, b) => a > b ? 1 : -1))
+console.log('sorted names:', objPairs.map(n => n.name).sort((a, b) => a > b ? 1 : -1))
 
 const amounts = objPairs.map(o => o.amount)
 const totalAmount = amounts.reduce((a, sum) => a + sum, 0)
