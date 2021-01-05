@@ -1,9 +1,10 @@
 import React from 'react'
 
 const Name = ({ obj }) => {
+
   return (
-    <div>
-       {obj.name}: {obj.amount}
+    <div style={{ color: 'darkcyan' }}>
+      {obj.name}: {obj.amount}
     </div>
   )
 }
