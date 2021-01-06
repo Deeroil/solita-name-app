@@ -5,15 +5,14 @@ import Button from './components/Button'
 import nameService from './services/names'
 
 /** Problems:
- *    * jos esim filtterinä on vaan V, niin tulos on suoraan amount
- *    * todo: kun nappia painetaan, tyhjennetään input sisältö? 
+ *    * kun nappia painetaan, haluanko tyhjentää inputin sisällön? 
  */
 
 const App = () => {
   const [allNames, setAllNames] = useState([])
   const [newFilter, setNewFilter] = useState('')
   //oisko joku muu nimi? nää on filtered or sorted
-  //namesList? ööhhmm
+  //namesList? hmm
   const [shownNames, setShownNames] = useState([])
   const [totalVisible, setTotalVisible] = useState(false)
 
