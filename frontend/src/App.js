@@ -62,10 +62,17 @@ const App = () => {
     setShownNames(filtered)
   }
 
-  const showResults = () => {
-    if (shownNames.length > 1) return <Namelist list={shownNames} />
+  //tried to avoid undefined with ternary, but then remembered conditional chaining! yaay!
+  //wanted to name firstRes only or last result, but it's the first in index
+  const showsLengthIsOne = (shownNames.length === 1)
+  const firstResult = shownNames[0]
+  const firstNameEqualsFilter = firstResult?.name.toUpperCase() === newFilter
 
-    else if (shownNames.length === 1) return <div> There are {shownNames[0].amount} {shownNames[0].name}s in Solita </div>
+  const showResults = () => {
+    //if shownNames has one item and it's equal to newFilter
+    if (showsLengthIsOne && firstNameEqualsFilter) return <div> There are {firstResult.amount} {firstResult.name}s in Solita </div>
+
+    else if (shownNames.length >= 1) return <Namelist list={shownNames} />
 
     else if (totalVisible) return <div> total amount: {totalAmount()} </div>
 
