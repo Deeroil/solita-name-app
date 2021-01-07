@@ -5,7 +5,8 @@ import Button from './components/Button'
 import nameService from './services/names'
 
 /** Problems:
- *    * kun nappia painetaan, haluanko tyhjentää inputin sisällön? 
+ *    * kun nappia painetaan, haluanko tyhjentää inputin sisällön?
+ *    * optional chaining isn't supported by some browsers like IE, and Firefox Android
  */
 
 const App = () => {
@@ -24,8 +25,22 @@ const App = () => {
     getNames()
   }, [])
 
+  //filter allNames and setShownNames after each change in newFilter/allNames 
   useEffect(() => {
-    filterList(allNames)
+    setTotalVisible(false)
+
+    const filtered = allNames
+      .filter(o => o.name
+        .trim()
+        .toUpperCase()
+        .startsWith(newFilter)
+      )
+
+    if (newFilter.length === 0 || filtered.size === 0) {
+      setShownNames('')
+      return
+    }
+    setShownNames(filtered)
   }, [newFilter, allNames])
 
   //kinda duplicatey, but makes the code more readable
@@ -43,24 +58,6 @@ const App = () => {
   }
 
   const totalAmount = () => allNames.reduce((sum, a) => sum + a.amount, 0)
-
-  const filterList = (list) => {
-    setTotalVisible(false)
-
-    const filtered = list
-      .filter(o => o.name
-        .trim()
-        .toUpperCase()
-        .startsWith(newFilter)
-      )
-
-    if (newFilter.length === 0 || filtered.size === 0) {
-      setShownNames('')
-      return
-    }
-
-    setShownNames(filtered)
-  }
 
   //tried to avoid undefined with ternary, but then remembered conditional chaining! yaay!
   //wanted to name firstRes only or last result, but it's the first in index
