@@ -12,8 +12,6 @@ import nameService from './services/names'
 const App = () => {
   const [allNames, setAllNames] = useState([])
   const [newFilter, setNewFilter] = useState('')
-  //oisko joku muu nimi? nää on filtered or sorted
-  //namesList? hmm
   const [shownNames, setShownNames] = useState([])
   const [totalVisible, setTotalVisible] = useState(false)
 
@@ -59,7 +57,6 @@ const App = () => {
 
   const totalAmount = () => allNames.reduce((sum, a) => sum + a.amount, 0)
 
-  //tried to avoid undefined with ternary, but then remembered conditional chaining! yaay!
   //wanted to name firstRes only or last result, but it's the first in index
   const showsLengthIsOne = (shownNames.length === 1)
   const firstResult = shownNames[0]
