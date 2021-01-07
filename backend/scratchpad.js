@@ -16,19 +16,19 @@ const objPairs = namesJSON.names
 //desc sort: 24 => 22 => 19....
 console.log('sort pairs desc amount:', objPairs.sort((a, b) => b.amount - a.amount))
 
-//ei tarvi miettiä case sensitiivisyyttä, koska mmmm...
-//nimet on kirjoitettu AINAKIN TOISTAISEKSI vain yhdessä muodossa.
-//ei tarvita nollaa, koska samoja nimiä ei ole kahdesti lol
+//ei tarvi miettiä case sensitiivisyyttä
+//nimet on kirjoitettu vain yhdessä muodossa.
+//ja ei tarvita nollaa, koska samoja nimiä ei ole kahdesti
 console.log('sort pairs alph:', objPairs.sort((a, b) => a.name > b.name ? 1 : -1))
 
-//oho ainiin ne halusi pelkät nimet
+//ne halusi pelkät nimet
 console.log('sorted names:', objPairs.map(n => n.name).sort((a, b) => a > b ? 1 : -1))
 
 const amounts = objPairs.map(o => o.amount)
 const totalAmount = amounts.reduce((a, sum) => a + sum, 0)
 console.log('totalAmount', totalAmount)
 
-//en tykkää tosta nollasta tuolla hjkfdhd ku filter tunkee sen arrayhyn
+//en tykkää tosta nollasta tuolla ku filter tunkee sen arrayhyn
 const getAmount = name => objPairs.filter(o => o.name == name)[0].amount
 
 console.log('Ville amount:', getAmount('Ville'))
